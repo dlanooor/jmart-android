@@ -11,12 +11,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.ronaldJmartBO.R;
 import com.ronaldJmartBO.jmart_android.model.Account;
 import com.ronaldJmartBO.jmart_android.request.LoginRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
     private static final Gson gson = new Gson();
@@ -31,30 +36,49 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        EditText loginEmailAddress = findViewById(R.id.loginEmailAddress);
-        EditText loginPassword = findViewById(R.id.loginPassword);
+        EditText editEmail = findViewById(R.id.loginEmailAddress);
+        EditText editPassword = findViewById(R.id.loginPassword);
         Button loginButton = findViewById(R.id.loginButton);
-        TextView registerLoginButton = findViewById(R.id.registerLoginButton);
+        TextView registerLogin = findViewById(R.id.registerLoginButton);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoginRequest newLogin = new LoginRequest(loginEmailAddress.getText().toString(), loginPassword.getText().toString(), new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
-                        loggedAccount.email = loginEmailAddress.getText().toString();
-                        loggedAccount.password = loginPassword.getText().toString();
-
-                        Intent loginSuccess = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(loginSuccess);
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                LoginRequest newLogin = new LoginRequest(
+                        editEmail.getText().toString(),
+                        editPassword.getText().toString(),
+                        new Response.Listener<String>() {
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    if (jsonObject != null) {
+                                        Toast.makeText(getApplicationContext(), "Login Success.", Toast.LENGTH_SHORT).show();
+                                        loggedAccount = gson.fromJson(jsonObject.toString(), Account.class);
+                                        Intent loginSuccess = new Intent(LoginActivity.this, MainActivity.class);
+                                        startActivity(loginSuccess);
+                                    }
+                                } catch (JSONException e) {
+                                    Toast.makeText(LoginActivity.this, "Login Failed.", Toast.LENGTH_SHORT).show();
+                                    e.printStackTrace();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(getApplicationContext(), "System Error Occurs..", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                );
+                RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+                queue.add(newLogin);
+            }
+        });
+        registerLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent registerPage = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(registerPage);
             }
         });
     }
