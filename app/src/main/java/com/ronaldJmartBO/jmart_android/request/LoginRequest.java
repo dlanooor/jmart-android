@@ -4,10 +4,11 @@ import com.android.volley.toolbox.StringRequest;
 
 import java.net.PortUnreachableException;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class LoginRequest extends StringRequest {
-    private static final String URL = "Http://10.0.2.2:8080/account/login";
+    private static final String URL = "http://10.0.2.2:8080/account/login";
     private final Map<String, String> params;
 
     public LoginRequest(String email, String password, Response.Listener<String> listener,
@@ -15,7 +16,7 @@ public class LoginRequest extends StringRequest {
     {
         super(Method.POST, URL, listener, errorListener);
         params = new HashMap<>();
-        params.put("email", email);
+        params.put("email", email.toLowerCase(Locale.ROOT));
         params.put("password", password);
     }
 

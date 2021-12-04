@@ -1,4 +1,4 @@
-package com.ronaldJmartBO.jmart_android;
+package com.ronaldJmartBO.jmart_android.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,9 +29,12 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        this.setTitle("Register");
+
         NameRegister = findViewById(R.id.registerName);
         EmailRegister = findViewById(R.id.registerEmail);
         PasswordRegister = findViewById(R.id.registerPassword);
+
         btnRegister = findViewById(R.id.registerButton);
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
                         try {
                             JSONObject object = new JSONObject(response);
                             if(object != null){
-                                Toast.makeText(RegisterActivity.this, "Register Sucess", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "Register Success", Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
                                 startActivity(i);
                             }

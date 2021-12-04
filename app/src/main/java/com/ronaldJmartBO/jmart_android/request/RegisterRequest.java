@@ -4,6 +4,7 @@ import com.android.volley.*;
 import com.android.volley.toolbox.StringRequest;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class RegisterRequest extends StringRequest {
@@ -16,7 +17,7 @@ public class RegisterRequest extends StringRequest {
         super(Method.POST, URL, listener, errorListener);
         params = new HashMap<>();
         params.put("name", name);
-        params.put("email", email);
+        params.put("email", email.toLowerCase(Locale.ROOT));
         params.put("password", password);
     }
 
