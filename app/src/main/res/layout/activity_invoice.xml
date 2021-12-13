@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".jmart_android.activity.MainActivity">
+    tools:context=".jmart_android.activity.InvoiceActivity">
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
+        android:id="@+id/invoiceLayout"
         style="@style/Widget.MaterialComponents.TabLayout.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/mypager"
+        android:id="@+id/invoicePager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="48dp"

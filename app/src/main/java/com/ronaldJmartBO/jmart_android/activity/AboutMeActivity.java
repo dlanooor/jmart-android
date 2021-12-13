@@ -40,17 +40,18 @@ public class AboutMeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about_me);
         this.setTitle("About Me");
 
-        final TextView tvNama = (TextView) findViewById(R.id.tvNama);
-        final TextView tvEmail = (TextView) findViewById(R.id.tvEmail);
-        final TextView tvBalance = (TextView) findViewById(R.id.tvBalance);
+        TextView tvNama = (TextView) findViewById(R.id.tvNama);
+        TextView tvEmail = (TextView) findViewById(R.id.tvEmail);
+        TextView tvBalance = (TextView) findViewById(R.id.tvBalance);
 
-        final TextView etName = (TextView) findViewById(R.id.etName);
-        final TextView etAddress = (TextView) findViewById(R.id.etAddress);
-        final TextView etPhoneNumber = (TextView) findViewById(R.id.etPhoneNumber);
+        TextView etName = (TextView) findViewById(R.id.etName);
+        TextView etAddress = (TextView) findViewById(R.id.etAddress);
+        TextView etPhoneNumber = (TextView) findViewById(R.id.etPhoneNumber);
 
-        final TextView tvNameDetail = (TextView) findViewById(R.id.tvStoreNameDetail);
-        final TextView tvAddressDetail = (TextView) findViewById(R.id.tvStoreAddressDetail);
-        final TextView tvPhoneNumberDetail = (TextView) findViewById(R.id.tvStorePhoneNumberDetail);
+        TextView tvNameDetail = (TextView) findViewById(R.id.tvStoreNameDetail);
+        TextView tvAddressDetail = (TextView) findViewById(R.id.tvStoreAddressDetail);
+        TextView tvPhoneNumberDetail = (TextView) findViewById(R.id.tvStorePhoneNumberDetail);
+        TextView tvBalanceDetail = (TextView) findViewById(R.id.tvStoreBalanceDetail);
 
         RequestQueue queue = Volley.newRequestQueue(AboutMeActivity.this);
 
@@ -72,6 +73,7 @@ public class AboutMeActivity extends AppCompatActivity {
             tvNameDetail.setText(getLoggedAccount().store.name);
             tvAddressDetail.setText(getLoggedAccount().store.address);
             tvPhoneNumberDetail.setText(getLoggedAccount().store.phoneNumber);
+            tvBalanceDetail.setText(String.valueOf(getLoggedAccount().store.balance));
         }
 
         else {
@@ -182,5 +184,15 @@ public class AboutMeActivity extends AppCompatActivity {
                 findViewById(R.id.btnRegisterStore).setVisibility(View.VISIBLE);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        TextView tvBalance = (TextView) findViewById(R.id.tvBalance);
+        tvBalance.setText(String.valueOf(getLoggedAccount().balance));
+
+        TextView tvBalanceDetail = (TextView) findViewById(R.id.tvStoreBalanceDetail);
+        tvBalanceDetail.setText(String.valueOf(getLoggedAccount().store.balance));
     }
 }
