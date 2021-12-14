@@ -50,7 +50,8 @@ public class Products extends Fragment {
 
     List<Product> productIntent = new ArrayList<>();
 
-    // TODO: Rename and change types of parameters
+    public static List<Product> productShare = new ArrayList<>();
+
     private String mParam1;
     private String mParam2;
 
@@ -93,6 +94,7 @@ public class Products extends Fragment {
         ListView listItems = view.findViewById(R.id.listView);
 
         Gson gson = new Gson();
+        productShare.clear();
 
         pageNumber = (EditText) view.findViewById(R.id.pageNumber);
 
@@ -143,10 +145,10 @@ public class Products extends Fragment {
                                     JSONObject newObj = jsonArray.getJSONObject(i);
                                     Product product = gson.fromJson(newObj.toString(), Product.class);
                                     productReturned.add(product.name);
+                                    productShare.add(product);
                                     productIntent.add(product);
                                 }
 
-//                                ArrayAdapter<Product> allItemsAdapter = new ArrayAdapter<Product>(getActivity().getBaseContext(), android.R.layout.simple_list_item_1, productReturned);
                                 ArrayAdapter<String> allItemsAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), android.R.layout.simple_list_item_1, productReturned);
                                 listItems.setAdapter(allItemsAdapter);
                             }
@@ -186,6 +188,7 @@ public class Products extends Fragment {
                                     JSONObject newObj = jsonArray.getJSONObject(i);
                                     Product product = gson.fromJson(newObj.toString(), Product.class);
                                     productReturned.add(product.name);
+                                    productShare.add(product);
                                     productIntent.add(product);
                                 }
 
@@ -256,6 +259,8 @@ public class Products extends Fragment {
 
         Gson gson = new Gson();
 
+        productShare.clear();
+
         // if isFiltered from Filter Fragment Return False
         if (!isFiltered) {
             Response.Listener<String> listener = new Response.Listener<String>() {
@@ -269,6 +274,7 @@ public class Products extends Fragment {
                             JSONObject newObj = jsonArray.getJSONObject(i);
                             Product product = gson.fromJson(newObj.toString(), Product.class);
                             productReturned.add(product.name);
+                            productShare.add(product);
                             productIntent.add(product);
                         }
 
@@ -309,10 +315,10 @@ public class Products extends Fragment {
                             JSONObject newObj = jsonArray.getJSONObject(i);
                             Product product = gson.fromJson(newObj.toString(), Product.class);
                             productReturned.add(product.name);
+                            productShare.add(product);
                             productIntent.add(product);
                         }
 
-//                                ArrayAdapter<Product> allItemsAdapter = new ArrayAdapter<Product>(getActivity().getBaseContext(), android.R.layout.simple_list_item_1, productReturned);
                         ArrayAdapter<String> allItemsAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), android.R.layout.simple_list_item_1, productReturned);
                         listItems.setAdapter(allItemsAdapter);
                     } catch (JSONException e) {

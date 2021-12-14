@@ -35,7 +35,6 @@ public class StoreInvoice extends Fragment {
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment StoreInvoice.
      */
     // TODO: Rename and change types and number of parameters

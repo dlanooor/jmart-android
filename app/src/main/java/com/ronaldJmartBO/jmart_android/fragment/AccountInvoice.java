@@ -1,12 +1,17 @@
 package com.ronaldJmartBO.jmart_android.fragment;
 
+import static com.ronaldJmartBO.jmart_android.fragment.Products.productShare;
+
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -17,8 +22,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.ronaldJmartBO.R;
+import com.ronaldJmartBO.jmart_android.activity.AccountInvoiceDetail;
+import com.ronaldJmartBO.jmart_android.activity.ProductDetail;
 import com.ronaldJmartBO.jmart_android.model.Payment;
 import com.ronaldJmartBO.jmart_android.model.Product;
+import com.ronaldJmartBO.jmart_android.model.Shipment;
 import com.ronaldJmartBO.jmart_android.request.PaymentRequest;
 import com.ronaldJmartBO.jmart_android.request.ProductRequest;
 
@@ -44,6 +52,8 @@ public class AccountInvoice extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    List<Payment> paymentIntent = new ArrayList<>();
 
     public AccountInvoice() {
         // Required empty public constructor
@@ -85,15 +95,22 @@ public class AccountInvoice extends Fragment {
             public void onResponse(String response) {
                 try {
                     JSONArray jsonArray = new JSONArray(response);
-                    List<Payment> paymentReturned = new ArrayList<>();
+                    List<String> paymentReturned = new ArrayList<>();
 
                     for(int i = 0; i < jsonArray.length(); i++) {
                         JSONObject newObj = jsonArray.getJSONObject(i);
                         Payment payment = gson.fromJson(newObj.toString(), Payment.class);
-                        paymentReturned.add(payment);
+                        paymentIntent.add(payment);
+
+                        for(Product product : productShare) {
+                            if(product.id == payment.productId)
+                                paymentReturned.add(product.name);
+                        }
+//
+//                        paymentReturned.add("Product ID: " + payment.productId);
                     }
 
-                    ArrayAdapter<Payment> allItemsAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), android.R.layout.simple_list_item_1, paymentReturned);
+                    ArrayAdapter<String> allItemsAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), android.R.layout.simple_list_item_1, paymentReturned);
                     listItems.setAdapter(allItemsAdapter);
                 }
                 catch (JSONException e) {
@@ -109,9 +126,46 @@ public class AccountInvoice extends Fragment {
             }
         };
 
-        PaymentRequest paymentRequest = new PaymentRequest(1, listener, errorListener);
+        PaymentRequest paymentRequest = new PaymentRequest(0, listener, errorListener);
         RequestQueue queue = Volley.newRequestQueue(getActivity().getBaseContext());
         queue.add(paymentRequest);
+
+        listItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //intentObject
+                Intent i = new Intent(getActivity().getBaseContext(), AccountInvoiceDetail.class);
+                
+                //packData
+                i.putExtra("SENDER_KEY", "AccountInvoiceFragment");
+                i.putExtra("BUYERID_KEY", String.valueOf(paymentIntent.get(position).buyerId));
+                i.putExtra("PRODID_KEY", String.valueOf(paymentIntent.get(position).productId));
+                i.putExtra("ADDRESS_KEY", String.valueOf(paymentIntent.get(position).shipment.address));
+                i.putExtra("COST_KEY", String.valueOf(paymentIntent.get(position).shipment.cost));
+
+                if(paymentIntent.get(position).shipment.plan == 1)
+                    i.putExtra("PLAN_KEY", "INSTANT");
+                else if(paymentIntent.get(position).shipment.plan == 2)
+                    i.putExtra("PLAN_KEY", "SAME DAY");
+                else if(paymentIntent.get(position).shipment.plan == 4)
+                    i.putExtra("PLAN_KEY", "NEXT DAY");
+                else if(paymentIntent.get(position).shipment.plan == 8)
+                    i.putExtra("PLAN_KEY", "REGULER");
+                else if(paymentIntent.get(position).shipment.plan == 16)
+                    i.putExtra("PLAN_KEY", "KARGO");
+
+                i.putExtra("RECEIPT_KEY", String.valueOf(paymentIntent.get(position).shipment.receipt));
+                i.putExtra("PAYMENT_ID", String.valueOf(paymentIntent.get(position).id));
+                i.putExtra("HISTORY_SIZE", String.valueOf(paymentIntent.get(position).history.size()));
+
+                for(int j = 0; j < paymentIntent.get(position).history.size(); j++) {
+                    i.putExtra("HISTORY_KEY" + String.valueOf(j), String.valueOf(paymentIntent.get(position).history.get(j).status));
+                }
+
+                //startActivity
+                getActivity().startActivity(i);
+            }
+        });
 
         // Inflate the layout for this fragment
         return view;
