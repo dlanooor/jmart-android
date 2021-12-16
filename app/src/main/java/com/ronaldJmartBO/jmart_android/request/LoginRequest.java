@@ -7,10 +7,21 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * The type Login request.
+ */
 public class LoginRequest extends StringRequest {
     private static final String URL = "http://10.0.2.2:8080/account/login";
     private final Map<String, String> params;
 
+    /**
+     * Instantiates a new Login request.
+     *
+     * @param email         the email
+     * @param password      the password
+     * @param listener      the listener
+     * @param errorListener the error listener
+     */
     public LoginRequest(String email, String password, Response.Listener<String> listener,
                         Response.ErrorListener errorListener)
     {

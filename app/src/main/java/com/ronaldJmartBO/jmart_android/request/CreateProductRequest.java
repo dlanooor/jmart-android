@@ -9,10 +9,26 @@ import com.ronaldJmartBO.jmart_android.model.ProductCategory;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The type Create product request.
+ */
 public class CreateProductRequest extends StringRequest {
     private static final String URL = "http://10.0.2.2:8080/product/create";
     private final Map<String, String> params;
 
+    /**
+     * Instantiates a new Create product request.
+     *
+     * @param name          the name
+     * @param weight        the weight
+     * @param conditionUsed the condition used
+     * @param price         the price
+     * @param discount      the discount
+     * @param category      the category
+     * @param shipmentPlans the shipment plans
+     * @param listener      the listener
+     * @param errorListener the error listener
+     */
     public CreateProductRequest(String name, int weight, boolean conditionUsed, double price, double discount, ProductCategory category, byte shipmentPlans, Response.Listener<String> listener, Response.ErrorListener errorListener) {
         super(Method.POST, URL, listener, errorListener);
         params = new HashMap<>();

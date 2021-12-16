@@ -31,12 +31,36 @@ public class Filter extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    /**
+     * The constant isFiltered.
+     */
     public static boolean isFiltered = false;
+    /**
+     * The constant nameFilter.
+     */
     public static String nameFilter;
-    public static int lowestPriceFilter, highestPriceFilter;
-    public static boolean newFilter, usedFilter;
+    /**
+     * The constant lowestPriceFilter.
+     */
+    public static int lowestPriceFilter, /**
+     * The Highest price filter.
+     */
+    highestPriceFilter;
+    /**
+     * The constant newFilter.
+     */
+    public static boolean newFilter, /**
+     * The Used filter.
+     */
+    usedFilter;
+    /**
+     * The constant categoryFilter.
+     */
     public static ProductCategory categoryFilter;
 
+    /**
+     * Instantiates a new Filter.
+     */
     public Filter() {
         // Required empty public constructor
     }
@@ -48,7 +72,6 @@ public class Filter extends Fragment {
      * @param param1 Parameter 1.
      * @return A new instance of fragment Filter.
      */
-
     public static Filter newInstance(String param1) {
         Filter fragment = new Filter();
         Bundle args = new Bundle();
@@ -64,7 +87,6 @@ public class Filter extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override

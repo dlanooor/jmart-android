@@ -22,13 +22,27 @@ import com.ronaldJmartBO.jmart_android.request.LoginRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * The type Login activity.
+ */
 public class LoginActivity extends AppCompatActivity {
     private static final Gson gson = new Gson();
     private static Account loggedAccount = null;
 
+    /**
+     * Gets logged account.
+     *
+     * @return the logged account
+     */
     public static Account getLoggedAccount() {
         return loggedAccount;
     }
+
+    /**
+     * Sets logged account.
+     *
+     * @param account the account
+     */
     public static void setLoggedAccount(Account account) {
         loggedAccount = account;
     }

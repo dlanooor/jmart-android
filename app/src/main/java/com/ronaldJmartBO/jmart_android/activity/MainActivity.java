@@ -12,10 +12,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -23,8 +19,14 @@ import com.ronaldJmartBO.R;
 import com.ronaldJmartBO.jmart_android.fragment.Filter;
 import com.ronaldJmartBO.jmart_android.fragment.Products;
 
+/**
+ * The type Main activity.
+ */
 public class MainActivity extends AppCompatActivity {
     private static final int NUM_PAGES = 2;
+    /**
+     * The constant viewPager.
+     */
     //The pager widget, which handles animation and allows swiping horizontally to access previous and next wizard steps.
     public static ViewPager2 viewPager;
     // The pager adapter, which provides the pages to the view pager widget.
@@ -32,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
     // Arrey of strings FOR TABS TITLES
     private String[] titles = new String[]{"Products", "Filter"};
     // tab titles
+
+    /**
+     * The constant loggedId.
+     */
+    public static String loggedId = String.valueOf(getLoggedAccount().id);
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -52,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.person:
                 startActivity(new Intent(MainActivity.this, AboutMeActivity.class));
+                return true;
+            case R.id.phoneTopUp:
+                startActivity(new Intent(MainActivity.this, PhoneTopUpActivity.class));
                 return true;
             case R.id.invoice:
                 startActivity(new Intent(MainActivity.this, InvoiceActivity.class));
@@ -80,6 +90,11 @@ public class MainActivity extends AppCompatActivity {
 
     private class MyPagerAdapter extends FragmentStateAdapter {
 
+        /**
+         * Instantiates a new My pager adapter.
+         *
+         * @param fa the fa
+         */
         public MyPagerAdapter(FragmentActivity fa) {
             super(fa);
         }
@@ -105,14 +120,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        if (viewPager.getCurrentItem() == 0) {
-        // If the user is currently looking at the first step, allow the system to handle the
-            // Back button. This calls finish() on this activity and pops the back stack.d
-            super.onBackPressed();
-        } else {
-        // Otherwise, select the previous step.
-            viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
-        }
+    protected void onResume() {
+        super.onResume();
+        loggedId = String.valueOf(getLoggedAccount().id);
     }
 }

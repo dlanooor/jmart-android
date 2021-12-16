@@ -25,6 +25,12 @@ import com.ronaldJmartBO.jmart_android.request.CreateProductRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
+/**
+ * The type Product detail.
+ */
 public class ProductDetail extends AppCompatActivity {
 
     private TextView prodDetailName, prodDetailWeight, prodDetailCondition, prodDetailCategory, prodDetailPrice, prodDetailDiscount, prodDetailShipment;
@@ -34,6 +40,9 @@ public class ProductDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
         this.setTitle("Product Detail");
+
+        Locale myIndonesianLocale = new Locale("in", "ID");
+        NumberFormat formater = NumberFormat.getCurrencyInstance(myIndonesianLocale);
 
         prodDetailName = (TextView) findViewById(R.id.tvProductDetailName);
         prodDetailWeight = (TextView) findViewById(R.id.tvProductDetailWeight);
@@ -46,6 +55,7 @@ public class ProductDetail extends AppCompatActivity {
         final String sender = this.getIntent().getExtras().getString("SENDER_KEY");
         Intent i = getIntent();
         String prodId = i.getStringExtra("PRODID_KEY");
+        int accId = Integer.parseInt(i.getStringExtra("ACCID_KEY"));
         String name = i.getStringExtra("NAME_KEY");
         String weight = i.getStringExtra("WEIGHT_KEY");
         String condition = i.getStringExtra("CONDITION_KEY");
@@ -66,7 +76,7 @@ public class ProductDetail extends AppCompatActivity {
         }
 
         prodDetailCategory.setText(category);
-        prodDetailPrice.setText("Rp" + price);
+        prodDetailPrice.setText(String.valueOf(formater.format(Double.parseDouble(price))));
         prodDetailDiscount.setText(discount + "%");
         if(shipment.equals("1"))
             prodDetailShipment.setText("INSTANT");
@@ -78,6 +88,7 @@ public class ProductDetail extends AppCompatActivity {
             prodDetailShipment.setText("REGULER");
         else if(shipment.equals("16"))
             prodDetailShipment.setText("KARGO");
+
 
         EditText prodCount = (EditText) findViewById(R.id.btnAmountProdDetail);
 
@@ -173,5 +184,13 @@ public class ProductDetail extends AppCompatActivity {
                 }
             }
         });
+
+        if(accId == getLoggedAccount().id) {
+            prodCount.setVisibility(View.GONE);
+            nextButton.setVisibility(View.GONE);
+            prevButton.setVisibility(View.GONE);
+            cancelProdDetail.setVisibility(View.GONE);
+            buyButton.setVisibility(View.GONE);
+        }
     }
 }

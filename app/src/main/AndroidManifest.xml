@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Jmartandroid"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".jmart_android.activity.PhoneTopUpActivity"
+            android:exported="false" />
+        <activity
             android:name=".jmart_android.activity.AccountInvoiceDetail"
             android:exported="false" />
         <activity

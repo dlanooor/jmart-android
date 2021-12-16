@@ -5,6 +5,7 @@ import static com.ronaldJmartBO.jmart_android.activity.LoginActivity.getLoggedAc
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.icu.text.NumberFormat;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
@@ -21,24 +22,36 @@ import com.android.volley.toolbox.Volley;
 import com.ronaldJmartBO.R;
 import com.ronaldJmartBO.jmart_android.model.Payment;
 import com.ronaldJmartBO.jmart_android.model.Product;
+import com.ronaldJmartBO.jmart_android.request.AcceptPaymentRequest;
 import com.ronaldJmartBO.jmart_android.request.CancelPaymentRequest;
+import com.ronaldJmartBO.jmart_android.request.PaymentSubmitRequest;
 import com.ronaldJmartBO.jmart_android.request.TopUpRequest;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+/**
+ * The type Account invoice detail.
+ */
 public class AccountInvoiceDetail extends AppCompatActivity {
 
     private TextView tvAccountInvoiceDetailBuyerId, tvAccountInvoiceDetailProductId, tvAccountInvoiceDetailProductAddress, tvAccountInvoiceDetailShipmentCost, tvAccountInvoiceDetailShipmentPlan, tvAccountInvoiceDetailShipmentReceipt;
+    /**
+     * The constant paymentId.
+     */
     public static int paymentId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_invoice_detail);
-        this.setTitle("Account Invoice Detail");
+        this.setTitle("Invoice Detail");
+
+        Locale myIndonesianLocale = new Locale("in", "ID");
+        NumberFormat formater = NumberFormat.getCurrencyInstance(myIndonesianLocale);
 
         ListView listItems = (ListView) findViewById(R.id.lvAccountInvoiceHistory);
 
@@ -51,6 +64,8 @@ public class AccountInvoiceDetail extends AppCompatActivity {
         String plan = i.getStringExtra("PLAN_KEY");
         String receipt = i.getStringExtra("RECEIPT_KEY");
         String history = i.getStringExtra("HISTORY_KEY");
+        String accStore = i.getStringExtra("ACCOUNT_STORE");
+
         paymentId = Integer.parseInt(i.getStringExtra("PAYMENT_ID"));
 
         Integer historySize = Integer.parseInt(i.getStringExtra("HISTORY_SIZE"));
@@ -74,14 +89,14 @@ public class AccountInvoiceDetail extends AppCompatActivity {
         tvAccountInvoiceDetailBuyerId.setText(buyerId);
         tvAccountInvoiceDetailProductId.setText(prodId);
         tvAccountInvoiceDetailProductAddress.setText(address);
-        tvAccountInvoiceDetailShipmentCost.setText(cost);
+        tvAccountInvoiceDetailShipmentCost.setText(String.valueOf(formater.format(Double.parseDouble(cost))));
         tvAccountInvoiceDetailShipmentPlan.setText(plan);
         tvAccountInvoiceDetailShipmentReceipt.setText(receipt);
 
         Button cancelButton = (Button) findViewById(R.id.btnCancelAccountInvoice);
 
-        if(historyReturned.get(historySize - 1).equals("WAITING_CONFIRMATION"))
-            cancelButton.setVisibility(View.VISIBLE);
+        if(!historyReturned.get(historySize - 1).equals("WAITING_CONFIRMATION"))
+            cancelButton.setVisibility(View.GONE);
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,5 +127,72 @@ public class AccountInvoiceDetail extends AppCompatActivity {
 
             };
         });
+
+        if(accStore.equals("STORE") && historyReturned.get(historySize - 1).equals("WAITING_CONFIRMATION")) {
+            Button acceptButton = (Button) findViewById(R.id.btnAcceptAccountInvoice);
+            acceptButton.setVisibility(View.VISIBLE);
+            acceptButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Response.Listener<String> listener = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            if(response.toLowerCase().equals("true")) {
+                                Toast.makeText(getApplicationContext(), "Accept Success", Toast.LENGTH_SHORT).show();
+                                Intent j = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(j);
+                            }
+                            else
+                                Toast.makeText(getApplicationContext(), "Accept Failed", Toast.LENGTH_SHORT).show();
+                        }
+                    };
+
+                    Response.ErrorListener errorListener = new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(AccountInvoiceDetail.this, "System Error Occurs..", Toast.LENGTH_SHORT).show();
+                        }
+                    };
+
+                    AcceptPaymentRequest acceptPaymentRequest = new AcceptPaymentRequest(listener, errorListener);
+                    RequestQueue queue = Volley.newRequestQueue(AccountInvoiceDetail.this);
+                    queue.add(acceptPaymentRequest);
+                }
+            });
+        }
+
+        else if(accStore.equals("STORE") && historyReturned.get(historySize - 1).equals("ON_PROGRESS")) {
+            Button submitButton = (Button) findViewById(R.id.btnSubmitAccountInvoice);
+            submitButton.setVisibility(View.VISIBLE);
+            submitButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Response.Listener<String> listener = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            if(response.toLowerCase().equals("true")) {
+                                Toast.makeText(getApplicationContext(), "Submit Success", Toast.LENGTH_SHORT).show();
+                                Intent j = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(j);
+                            }
+                            else
+                                Toast.makeText(getApplicationContext(), "Submit Failed", Toast.LENGTH_SHORT).show();
+                        }
+                    };
+
+                    Response.ErrorListener errorListener = new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(AccountInvoiceDetail.this, "System Error Occurs..", Toast.LENGTH_SHORT).show();
+                        }
+                    };
+
+                    PaymentSubmitRequest submitPaymentRequest = new PaymentSubmitRequest(listener, errorListener);
+                    RequestQueue queue = Volley.newRequestQueue(AccountInvoiceDetail.this);
+                    queue.add(submitPaymentRequest);
+                }
+            });
+        }
+
     }
 }

@@ -33,6 +33,19 @@
         <item>TRAVEL</item>
         <item>WEDDING</item>
     </string-array>
+    <string-array name="topUpAmount">
+        <item>Rp 10.000,00</item>
+        <item>Rp 25.000,00</item>
+        <item>Rp 50.000,00</item>
+        <item>Rp 75.000,00</item>
+        <item>Rp 100.000,00</item>
+        <item>Rp 150.000,00</item>
+        <item>Rp 200.000,00</item>
+        <item>Rp 250.000,00</item>
+        <item>Rp 500.000,00</item>
+        <item>Rp 750.000,00</item>
+        <item>Rp 1.000.000,00</item>
+    </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

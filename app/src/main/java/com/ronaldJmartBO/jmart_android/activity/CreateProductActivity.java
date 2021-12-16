@@ -24,7 +24,13 @@ import com.ronaldJmartBO.jmart_android.request.RegisterRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * The type Create product activity.
+ */
 public class CreateProductActivity extends AppCompatActivity {
+    /**
+     * The Condition used.
+     */
     boolean conditionUsed = false;
 
     @Override

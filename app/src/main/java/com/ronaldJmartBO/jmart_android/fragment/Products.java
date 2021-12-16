@@ -48,15 +48,37 @@ public class Products extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    /**
+     * The Product intent.
+     */
     List<Product> productIntent = new ArrayList<>();
 
+    /**
+     * The constant productShare.
+     */
     public static List<Product> productShare = new ArrayList<>();
 
     private String mParam1;
     private String mParam2;
 
+    /**
+     * The Page number.
+     */
     EditText pageNumber;
-    Button prevButton, nextButton, goButton;
+    /**
+     * The Prev button.
+     */
+    Button prevButton, /**
+     * The Next button.
+     */
+    nextButton, /**
+     * The Go button.
+     */
+    goButton;
+
+    /**
+     * Instantiates a new Products.
+     */
     public Products() {
         // Required empty public constructor
     }
@@ -68,7 +90,6 @@ public class Products extends Fragment {
      * @param param1 Parameter 1.
      * @return A new instance of fragment Products.
      */
-
     public static Products newInstance(String param1) {
         Products fragment = new Products();
         Bundle args = new Bundle();
@@ -236,6 +257,7 @@ public class Products extends Fragment {
                 //packData
                 i.putExtra("SENDER_KEY", "ProductFragment");
                 i.putExtra("PRODID_KEY", String.valueOf(productIntent.get(page + position).id));
+                i.putExtra("ACCID_KEY", String.valueOf(productIntent.get(page + position).accountId));
                 i.putExtra("NAME_KEY", String.valueOf(productIntent.get(page + position).name));
                 i.putExtra("WEIGHT_KEY", String.valueOf(productIntent.get(page + position).weight));
                 i.putExtra("CONDITION_KEY", String.valueOf(productIntent.get(page + position).conditionUsed));

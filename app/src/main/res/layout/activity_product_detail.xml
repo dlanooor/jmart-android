@@ -203,7 +203,7 @@
                 android:layout_marginBottom="16dp"
                 android:text="Confirm"
                 android:textSize="16sp"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -215,6 +215,7 @@
                 android:layout_marginBottom="16dp"
                 android:text="Cancel"
                 android:textSize="16sp"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -226,6 +227,7 @@
                 android:layout_marginEnd="32dp"
                 android:text="+"
                 android:textSize="18sp"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvProductDetailShipment" />
 
@@ -237,6 +239,7 @@
                 android:layout_marginEnd="5dp"
                 android:text="-"
                 android:textSize="18sp"
+                android:visibility="visible"
                 app:layout_constraintEnd_toStartOf="@+id/btnAmountProdDetail"
                 app:layout_constraintTop_toBottomOf="@+id/tvProductDetailShipment" />
 
@@ -251,6 +254,7 @@
                 android:inputType="numberDecimal"
                 android:text="1"
                 android:textSize="16sp"
+                android:visibility="visible"
                 app:layout_constraintEnd_toStartOf="@+id/btnPlusProdDetail"
                 app:layout_constraintTop_toBottomOf="@+id/tvProductDetailShipment" />
 

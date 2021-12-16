@@ -1,5 +1,6 @@
 package com.ronaldJmartBO.jmart_android.fragment;
 
+import static com.ronaldJmartBO.jmart_android.activity.LoginActivity.getLoggedAccount;
 import static com.ronaldJmartBO.jmart_android.fragment.Products.productShare;
 
 import android.content.Intent;
@@ -23,12 +24,9 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.ronaldJmartBO.R;
 import com.ronaldJmartBO.jmart_android.activity.AccountInvoiceDetail;
-import com.ronaldJmartBO.jmart_android.activity.ProductDetail;
 import com.ronaldJmartBO.jmart_android.model.Payment;
 import com.ronaldJmartBO.jmart_android.model.Product;
-import com.ronaldJmartBO.jmart_android.model.Shipment;
 import com.ronaldJmartBO.jmart_android.request.PaymentRequest;
-import com.ronaldJmartBO.jmart_android.request.ProductRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,17 +42,21 @@ import java.util.List;
  */
 public class AccountInvoice extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
+    /**
+     * The Payment intent.
+     */
     List<Payment> paymentIntent = new ArrayList<>();
 
+    /**
+     * Instantiates a new Account invoice.
+     */
     public AccountInvoice() {
         // Required empty public constructor
     }
@@ -66,7 +68,6 @@ public class AccountInvoice extends Fragment {
      * @param param1 Parameter 1.
      * @return A new instance of fragment AccountInvoice.
      */
-    // TODO: Rename and change types and number of parameters
     public static AccountInvoice newInstance(String param1) {
         AccountInvoice fragment = new AccountInvoice();
         Bundle args = new Bundle();
@@ -106,10 +107,8 @@ public class AccountInvoice extends Fragment {
                             if(product.id == payment.productId)
                                 paymentReturned.add(product.name);
                         }
-//
-//                        paymentReturned.add("Product ID: " + payment.productId);
-                    }
 
+                    }
                     ArrayAdapter<String> allItemsAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), android.R.layout.simple_list_item_1, paymentReturned);
                     listItems.setAdapter(allItemsAdapter);
                 }
@@ -157,7 +156,7 @@ public class AccountInvoice extends Fragment {
                 i.putExtra("RECEIPT_KEY", String.valueOf(paymentIntent.get(position).shipment.receipt));
                 i.putExtra("PAYMENT_ID", String.valueOf(paymentIntent.get(position).id));
                 i.putExtra("HISTORY_SIZE", String.valueOf(paymentIntent.get(position).history.size()));
-
+                i.putExtra("ACCOUNT_STORE", "ACCOUNT");
                 for(int j = 0; j < paymentIntent.get(position).history.size(); j++) {
                     i.putExtra("HISTORY_KEY" + String.valueOf(j), String.valueOf(paymentIntent.get(position).history.get(j).status));
                 }

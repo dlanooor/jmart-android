@@ -7,10 +7,22 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * The type Register request.
+ */
 public class RegisterRequest extends StringRequest {
     private static final String URL = "http://10.0.2.2:8080/account/register";
     private final Map<String, String> params;
 
+    /**
+     * Instantiates a new Register request.
+     *
+     * @param name          the name
+     * @param email         the email
+     * @param password      the password
+     * @param listener      the listener
+     * @param errorListener the error listener
+     */
     public RegisterRequest(String name, String email, String password,
                            Response.Listener<String> listener, Response.ErrorListener errorListener)
     {

@@ -45,7 +45,7 @@
                 android:ems="10"
                 android:hint="Name"
                 android:inputType="textPersonName"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +62,7 @@
                 android:ems="10"
                 android:hint="Weight"
                 android:inputType="number"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/createProductName" />
@@ -77,7 +77,7 @@
                 android:ems="10"
                 android:hint="Price"
                 android:inputType="numberDecimal"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/createProductWeight" />
@@ -92,7 +92,7 @@
                 android:ems="10"
                 android:hint="Discount"
                 android:inputType="number"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/createProductPrice" />
@@ -104,7 +104,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="25dp"
                 android:text="Condition"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/createProductDiscount" />
 
@@ -112,7 +112,7 @@
                 android:id="@+id/createProductSpinnerCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:entries="@array/productCategory"
                 android:spinnerMode="dropdown"
@@ -128,7 +128,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="16dp"
                 android:text="Shipment Plan"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/createProductCategory" />
@@ -137,12 +137,12 @@
                 android:id="@+id/createProductSpinnerPlan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="28dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:entries="@array/shipmentPlans"
                 android:spinnerMode="dropdown"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/createProductSpinnerCategory" />
@@ -154,7 +154,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="30dp"
                 android:text="Category"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/createProductCondition" />
 
@@ -162,7 +162,7 @@
                 android:id="@+id/radioGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -192,21 +192,21 @@
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
         android:text="Create"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createProductCardView" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/productActivityCancel"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="32dp"
         android:text="Cancel"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createProductCardView" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,6 @@ import static com.ronaldJmartBO.jmart_android.activity.LoginActivity.setLoggedAc
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,21 +15,21 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.ronaldJmartBO.R;
 import com.google.gson.Gson;
-import com.ronaldJmartBO.jmart_android.model.Account;
-import com.ronaldJmartBO.jmart_android.model.Store;
 import com.ronaldJmartBO.jmart_android.request.RegisterStoreRequest;
-import com.ronaldJmartBO.jmart_android.request.RequestFactory;
 import com.ronaldJmartBO.jmart_android.request.TopUpRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.NumberFormat;
 import java.util.Locale;
 
+/**
+ * The type About me activity.
+ */
 public class AboutMeActivity extends AppCompatActivity {
     private static final Gson gson = new Gson();
 
@@ -39,6 +38,9 @@ public class AboutMeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_me);
         this.setTitle("About Me");
+
+        Locale myIndonesianLocale = new Locale("in", "ID");
+        NumberFormat formater = NumberFormat.getCurrencyInstance(myIndonesianLocale);
 
         TextView tvNama = (TextView) findViewById(R.id.tvNama);
         TextView tvEmail = (TextView) findViewById(R.id.tvEmail);
@@ -57,7 +59,7 @@ public class AboutMeActivity extends AppCompatActivity {
 
         String name = getLoggedAccount().name;
         String email = getLoggedAccount().email;
-        String balance = String.valueOf(getLoggedAccount().balance);
+        String balance = String.valueOf(formater.format(getLoggedAccount().balance));
 
         tvNama.setText(name);
         tvEmail.setText(email);
@@ -73,7 +75,7 @@ public class AboutMeActivity extends AppCompatActivity {
             tvNameDetail.setText(getLoggedAccount().store.name);
             tvAddressDetail.setText(getLoggedAccount().store.address);
             tvPhoneNumberDetail.setText(getLoggedAccount().store.phoneNumber);
-            tvBalanceDetail.setText(String.valueOf(getLoggedAccount().store.balance));
+            tvBalanceDetail.setText(String.valueOf(formater.format(getLoggedAccount().store.balance)));
         }
 
         else {
@@ -90,8 +92,8 @@ public class AboutMeActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         if(response.toLowerCase().equals("true")){
-                            Double updateBalance = Double.parseDouble(tvBalance.getText().toString()) + Double.parseDouble(topUpAmount.getText().toString());
-                            tvBalance.setText(String.valueOf(updateBalance));
+                            Double updateBalance = getLoggedAccount().balance + Double.parseDouble(topUpAmount.getText().toString());
+                            tvBalance.setText(String.valueOf(formater.format(updateBalance)));
                             getLoggedAccount().balance = updateBalance;
 
                             Toast.makeText(getApplicationContext(), "Top Up Success", Toast.LENGTH_SHORT).show();
@@ -189,10 +191,15 @@ public class AboutMeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        TextView tvBalance = (TextView) findViewById(R.id.tvBalance);
-        tvBalance.setText(String.valueOf(getLoggedAccount().balance));
+        Locale myIndonesianLocale = new Locale("in", "ID");
+        NumberFormat formater = NumberFormat.getCurrencyInstance(myIndonesianLocale);
 
-        TextView tvBalanceDetail = (TextView) findViewById(R.id.tvStoreBalanceDetail);
-        tvBalanceDetail.setText(String.valueOf(getLoggedAccount().store.balance));
+        TextView tvBalance = (TextView) findViewById(R.id.tvBalance);
+        tvBalance.setText(String.valueOf(formater.format(getLoggedAccount().balance)));
+
+        if(getLoggedAccount().store != null) {
+            TextView tvBalanceDetail = (TextView) findViewById(R.id.tvStoreBalanceDetail);
+            tvBalanceDetail.setText(String.valueOf(formater.format(getLoggedAccount().store.balance)));
+        }
     }
 }

@@ -14,10 +14,15 @@
         android:visible="false"
         app:showAsAction="always" />
     <item
+        android:id="@+id/phoneTopUp"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_baseline_phone_android_24"
+        android:title="Phone Top Up" />
+    <item
         android:id="@+id/invoice"
         app:showAsAction="always"
         android:icon="@drawable/ic_baseline_fact_check_24"
-        android:title="Person" />
+        android:title="Invoice" />
     <item
         android:id="@+id/person"
         app:showAsAction="always"

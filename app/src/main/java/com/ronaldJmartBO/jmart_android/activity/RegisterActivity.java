@@ -19,6 +19,9 @@ import com.ronaldJmartBO.jmart_android.request.RegisterRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * The type Register activity.
+ */
 public class RegisterActivity extends AppCompatActivity {
     private EditText NameRegister;
     private EditText EmailRegister;
