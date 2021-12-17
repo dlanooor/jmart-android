@@ -1,8 +1,10 @@
 package com.ronaldJmartBO.jmart_android.activity;
 
 import static com.ronaldJmartBO.jmart_android.activity.LoginActivity.getLoggedAccount;
+import static com.ronaldJmartBO.jmart_android.fragment.Products.productShare;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -12,6 +14,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -19,6 +23,7 @@ import com.ronaldJmartBO.R;
 import com.ronaldJmartBO.jmart_android.fragment.AccountInvoice;
 import com.ronaldJmartBO.jmart_android.fragment.Products;
 import com.ronaldJmartBO.jmart_android.fragment.StoreInvoice;
+import com.ronaldJmartBO.jmart_android.model.Product;
 
 /**
  * The type Invoice activity.
@@ -45,6 +50,7 @@ public class InvoiceActivity extends AppCompatActivity {
             menu.findItem(R.id.add_box).setVisible(true);
         else
             menu.findItem(R.id.add_box).setVisible(false);
+
         return true;
     }
 
@@ -74,6 +80,9 @@ public class InvoiceActivity extends AppCompatActivity {
                 return true;
             case R.id.person:
                 startActivity(new Intent(InvoiceActivity.this, AboutMeActivity.class));
+                return true;
+            case R.id.phoneTopUp:
+                startActivity(new Intent(InvoiceActivity.this, PhoneTopUpActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

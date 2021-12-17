@@ -40,13 +40,14 @@ public class Product extends Serializable
 
     @Override
     public String toString(){
-        return  "Account ID: " + accountId +
-                "\nName: " + name +
-                "\nWeight: " + weight +
-                "\nCondition Used: " + conditionUsed +
-                "\nPrice: " + price +
-                "\nShipment Plans: " + shipmentPlans +
-                "\nDiscount: " + discount +
-                "\nCategory: " + category;
+//        return  "Account ID: " + accountId +
+//                "\nName: " + name +
+//                "\nWeight: " + weight +
+//                "\nCondition Used: " + conditionUsed +
+//                "\nPrice: " + price +
+//                "\nShipment Plans: " + shipmentPlans +
+//                "\nDiscount: " + discount +
+//                "\nCategory: " + category;
+        return name;
     }
 }
