@@ -13,7 +13,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The type Product filter request.
+ * The Product filter request.
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
  */
 public class ProductFilterRequest extends StringRequest {
     private static final String URL = "http://10.0.2.2:8080/product/getFiltered?page=%d&pageSize=%d&accountId=%d&search=%s&minPrice=%d&maxPrice=%d&category=%s";

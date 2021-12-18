@@ -1,7 +1,10 @@
 package com.ronaldJmartBO.jmart_android.model;
 
 /**
- * The type Product.
+ * Product Model
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
  */
 public class Product extends Serializable
 {

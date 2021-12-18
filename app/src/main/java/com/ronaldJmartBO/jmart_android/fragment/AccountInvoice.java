@@ -36,9 +36,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link AccountInvoice#newInstance} factory method to
- * create an instance of this fragment.
+ * Account Invoice Fragment
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
  */
 public class AccountInvoice extends Fragment {
 

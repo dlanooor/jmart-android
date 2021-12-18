@@ -3,7 +3,10 @@ package com.ronaldJmartBO.jmart_android.model;
 import java.util.Date;
 
 /**
- * The type Invoice.
+ * Invoice Model
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
  */
 public abstract class Invoice extends Serializable {
     /**

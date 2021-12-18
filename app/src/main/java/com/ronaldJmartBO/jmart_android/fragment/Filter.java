@@ -18,9 +18,10 @@ import com.ronaldJmartBO.R;
 import com.ronaldJmartBO.jmart_android.model.ProductCategory;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link Filter#newInstance} factory method to
- * create an instance of this fragment.
+ * Filter Fragment
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
  */
 public class Filter extends Fragment {
 

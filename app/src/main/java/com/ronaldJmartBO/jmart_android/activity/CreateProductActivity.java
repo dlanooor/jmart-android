@@ -26,6 +26,9 @@ import org.json.JSONObject;
 
 /**
  * The type Create product activity.
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
  */
 public class CreateProductActivity extends AppCompatActivity {
     /**
@@ -33,6 +36,10 @@ public class CreateProductActivity extends AppCompatActivity {
      */
     boolean conditionUsed = false;
 
+    /**
+     * onCreate
+     * set All CreateProductActivity needed
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +54,9 @@ public class CreateProductActivity extends AppCompatActivity {
         Spinner createProductSpinnerCategory = findViewById(R.id.createProductSpinnerCategory);
         Spinner createProductSpinnerPlan = findViewById(R.id.createProductSpinnerPlan);
 
+        /**
+         * create ProductActivity Function
+         */
         Button productActivityCreateButton = findViewById(R.id.productActivityCreateButton);
         productActivityCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,6 +132,7 @@ public class CreateProductActivity extends AppCompatActivity {
                     double productPrice = Double.parseDouble(createProductPrice.getText().toString());
                     double productDiscount = Double.parseDouble(createProductDiscount.getText().toString());
 
+                    //createProductRequest
                     CreateProductRequest createProduct = new CreateProductRequest(productName, productWeight, conditionUsed, productPrice, productDiscount, productCategory, productShipment, listener, errorListener);
                     RequestQueue queue = Volley.newRequestQueue(CreateProductActivity.this);
                     queue.add(createProduct);
@@ -134,6 +145,9 @@ public class CreateProductActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * cancel ProductActivity Function
+         */
         Button productActivityCancel = findViewById(R.id.productActivityCancel);
         productActivityCancel.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -34,7 +34,10 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * The type Account invoice detail.
+ * The Account invoice detail.
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
  */
 public class AccountInvoiceDetail extends AppCompatActivity {
 
@@ -44,6 +47,10 @@ public class AccountInvoiceDetail extends AppCompatActivity {
      */
     public static int paymentId;
 
+    /**
+     * onCreate
+     * set All AccountInvoiceDetail needed
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +100,9 @@ public class AccountInvoiceDetail extends AppCompatActivity {
         tvAccountInvoiceDetailShipmentPlan.setText(plan);
         tvAccountInvoiceDetailShipmentReceipt.setText(receipt);
 
+        /**
+         * cancel AccountInvoice Detail Function
+         */
         Button cancelButton = (Button) findViewById(R.id.btnCancelAccountInvoice);
 
         if(!historyReturned.get(historySize - 1).equals("WAITING_CONFIRMATION"))
@@ -121,6 +131,7 @@ public class AccountInvoiceDetail extends AppCompatActivity {
                     }
                 };
 
+                //cancelPaymentRequest
                 CancelPaymentRequest cancelPaymentRequest = new CancelPaymentRequest(listener, errorListener);
                 RequestQueue queue = Volley.newRequestQueue(AccountInvoiceDetail.this);
                 queue.add(cancelPaymentRequest);
@@ -128,6 +139,9 @@ public class AccountInvoiceDetail extends AppCompatActivity {
             };
         });
 
+        /**
+         * accept Payment in Account Invoice Detail Function
+         */
         if(accStore.equals("STORE") && historyReturned.get(historySize - 1).equals("WAITING_CONFIRMATION")) {
             Button acceptButton = (Button) findViewById(R.id.btnAcceptAccountInvoice);
             acceptButton.setVisibility(View.VISIBLE);
@@ -154,6 +168,7 @@ public class AccountInvoiceDetail extends AppCompatActivity {
                         }
                     };
 
+                    //acceptPaymentRequest
                     AcceptPaymentRequest acceptPaymentRequest = new AcceptPaymentRequest(listener, errorListener);
                     RequestQueue queue = Volley.newRequestQueue(AccountInvoiceDetail.this);
                     queue.add(acceptPaymentRequest);
@@ -161,6 +176,9 @@ public class AccountInvoiceDetail extends AppCompatActivity {
             });
         }
 
+        /**
+         * submit Payment in Account Invoice Detail Function
+         */
         else if(accStore.equals("STORE") && historyReturned.get(historySize - 1).equals("ON_PROGRESS")) {
             Button submitButton = (Button) findViewById(R.id.btnSubmitAccountInvoice);
             submitButton.setVisibility(View.VISIBLE);
@@ -187,6 +205,7 @@ public class AccountInvoiceDetail extends AppCompatActivity {
                         }
                     };
 
+                    //submitPaymentRequest
                     PaymentSubmitRequest submitPaymentRequest = new PaymentSubmitRequest(listener, errorListener);
                     RequestQueue queue = Volley.newRequestQueue(AccountInvoiceDetail.this);
                     queue.add(submitPaymentRequest);

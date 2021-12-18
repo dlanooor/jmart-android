@@ -8,7 +8,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The type Payment submit request.
+ * The Payment submit request.
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
  */
 public class PaymentSubmitRequest extends StringRequest {
     private static final String URL = "http://10.0.2.2:8080/payment/" + AccountInvoiceDetail.paymentId + "/submit";

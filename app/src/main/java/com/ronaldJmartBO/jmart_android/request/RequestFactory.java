@@ -7,7 +7,10 @@ import com.android.volley.toolbox.StringRequest;
 import java.net.URL;
 
 /**
- * The type Request factory.
+ * The Request factory.
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
  */
 public class RequestFactory
 {

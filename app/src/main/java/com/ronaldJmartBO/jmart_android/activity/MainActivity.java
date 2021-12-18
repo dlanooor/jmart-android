@@ -26,12 +26,16 @@ import com.ronaldJmartBO.jmart_android.model.Product;
 
 /**
  * The type Main activity.
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
  */
 public class MainActivity extends AppCompatActivity {
     private static final int NUM_PAGES = 2;
     /**
      * The constant viewPager.
      */
+
     //The pager widget, which handles animation and allows swiping horizontally to access previous and next wizard steps.
     public static ViewPager2 viewPager;
     // The pager adapter, which provides the pages to the view pager widget.
@@ -45,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
      */
     public static String loggedId = String.valueOf(getLoggedAccount().id);
 
+    /**
+     * onCreateOptionsMenu
+     * set All MainActivity options Menu
+     */
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
@@ -55,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         androidx.appcompat.widget.SearchView search = (androidx.appcompat.widget.SearchView) menu.findItem(R.id.search).getActionView();
 
+        //listView
         ListView listView = findViewById(R.id.listView);
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -76,6 +85,10 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * onOptionsItemSelected
+     * set All MainActivity onOptionsItems needed
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
@@ -97,6 +110,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * onCreate
+     * set All MainActivity needed
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,6 +131,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * MyPagerAdapterClass
+     * set All PagerAdapter in MainActivity needed
+     */
     private class MyPagerAdapter extends FragmentStateAdapter {
 
         /**
@@ -145,6 +166,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * onResume
+     * set All MainAcitvity onResume needed
+     */
     @Override
     protected void onResume() {
         super.onResume();

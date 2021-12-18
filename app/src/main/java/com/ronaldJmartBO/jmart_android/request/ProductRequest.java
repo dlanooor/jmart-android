@@ -9,7 +9,10 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 
 /**
- * The type Product request.
+ * The Product request.
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
  */
 public class ProductRequest extends StringRequest {
     private static final String URL = "http://10.0.2.2:8080/product/" + getLoggedAccount().id + "/store?page=%d&pageSize=%d";

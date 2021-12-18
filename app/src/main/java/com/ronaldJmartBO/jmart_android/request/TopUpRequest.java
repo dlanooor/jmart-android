@@ -16,7 +16,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The type Top up request.
+ * The Top up request.
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
  */
 public class TopUpRequest extends StringRequest{
     private final static String URL = "http://10.0.2.2:8080/account/" + getLoggedAccount().id + "/topUp";

@@ -1,10 +1,11 @@
 package com.ronaldJmartBO.jmart_android.model;
 
 /**
- * Category ENUM
+ * Product Category ENUM
  *
  * @author Ronald Grant
- * @version 18 Sept 2021
+ * @version 2.0
+ * @since 19 December 2021
  */
 public enum ProductCategory
 {

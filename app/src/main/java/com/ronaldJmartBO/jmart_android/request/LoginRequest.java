@@ -8,7 +8,10 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * The type Login request.
+ * The Login request.
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
  */
 public class LoginRequest extends StringRequest {
     private static final String URL = "http://10.0.2.2:8080/account/login";

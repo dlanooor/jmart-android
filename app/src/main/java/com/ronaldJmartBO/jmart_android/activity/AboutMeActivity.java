@@ -28,11 +28,18 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 /**
- * The type About me activity.
+ * The About me activity.
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
  */
 public class AboutMeActivity extends AppCompatActivity {
     private static final Gson gson = new Gson();
 
+    /**
+     * onCreate
+     * set All AboutMeActivity needed
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +91,9 @@ public class AboutMeActivity extends AppCompatActivity {
             findViewById(R.id.btnRegisterStore).setVisibility(View.VISIBLE);
         }
 
+        /**
+         * Top Up Account Balance Function
+         */
         final Button topUp = (Button) findViewById(R.id.btnTopUp);
         topUp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -118,6 +128,7 @@ public class AboutMeActivity extends AppCompatActivity {
                     if(amount < 10000)
                         Toast.makeText(getApplicationContext(), "Minimum Top Up is 10000", Toast.LENGTH_SHORT).show();
                     else {
+                        //topUp Request
                         TopUpRequest newTopUpRequest = new TopUpRequest(amount, listener, errorListener);
                         RequestQueue queue = Volley.newRequestQueue(AboutMeActivity.this);
                         queue.add(newTopUpRequest);
@@ -126,6 +137,9 @@ public class AboutMeActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Register Store Function.
+         */
         final Button registerStore = (Button) findViewById(R.id.btnRegisterStore);
         registerStore.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -134,6 +148,9 @@ public class AboutMeActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Register Store Submit Function
+         */
         final Button register = (Button) findViewById(R.id.btnRegister);
         register.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -172,12 +189,16 @@ public class AboutMeActivity extends AppCompatActivity {
                 String newStoreAddress = etAddress.getText().toString();
                 String newStorePhoneNumber = etPhoneNumber.getText().toString();
 
+                //registerNewStore Request
                 RegisterStoreRequest newRegisterStore = new RegisterStoreRequest(newStoreName, newStoreAddress, newStorePhoneNumber, listener, errorListener);
 
                 queue.add(newRegisterStore);
             }
         });
 
+        /**
+         * Cancel Submit Store Function
+         */
         final Button cancelStore = (Button) findViewById(R.id.btnCancel);
         cancelStore.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -188,6 +209,10 @@ public class AboutMeActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * onResume
+     * set All AboutMeActivity needed onResume
+     */
     @Override
     protected void onResume() {
         super.onResume();

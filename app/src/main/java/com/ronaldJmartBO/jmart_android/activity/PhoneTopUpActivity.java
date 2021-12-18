@@ -36,8 +36,18 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
+/**
+ * The type Phone top up activity.
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
+ */
 public class PhoneTopUpActivity extends AppCompatActivity {
 
+    /**
+     * onCreate
+     * set All PhoneTopUpActivity needed
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +64,9 @@ public class PhoneTopUpActivity extends AppCompatActivity {
 
         EditText phoneNumber = (EditText) findViewById(R.id.etPhoneTopUpPhone);
 
+        /**
+         * checkPhone Number Function
+         */
         Button checkPhone = (Button) findViewById(R.id.btnPhoneTopUpCheck);
         checkPhone.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +78,9 @@ public class PhoneTopUpActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * topUp Phone Function
+         */
         Button topUp = (Button) findViewById(R.id.btnPhoneTopUpTopUp);
         topUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +110,8 @@ public class PhoneTopUpActivity extends AppCompatActivity {
                 };
 
                 if(Pattern.matches("^(^\\+62|62|^08)(\\d{3,4}-?){2}\\d{3,4}$", phoneNumber.getText().toString())) {
+
+                    //createPhoneTopUp Request
                     CreatePhoneTopUpRequest topUpRequest = new CreatePhoneTopUpRequest(phoneNumber.getText().toString(), listener, errorListener);
                     RequestQueue queue = Volley.newRequestQueue(PhoneTopUpActivity.this);
                     queue.add(topUpRequest);
@@ -135,6 +153,7 @@ public class PhoneTopUpActivity extends AppCompatActivity {
             }
         };
 
+        //phoneTopUpHistory Request
         PhoneTopUpRequest phoneTopUp = new PhoneTopUpRequest(0, listener, errorListener);
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         queue.add(phoneTopUp);

@@ -27,13 +27,17 @@ import com.ronaldJmartBO.jmart_android.model.Product;
 
 /**
  * The type Invoice activity.
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
  */
 public class InvoiceActivity extends AppCompatActivity {
     private static final int NUM_PAGES = 2;
     /**
      * The constant viewPager.
      */
-//The pager widget, which handles animation and allows swiping horizontally to access previous and next wizard steps.
+
+    //The pager widget, which handles animation and allows swiping horizontally to access previous and next wizard steps.
     public static ViewPager2 viewPager;
     // The pager adapter, which provides the pages to the view pager widget.
     private FragmentStateAdapter pagerAdapter;
@@ -41,6 +45,10 @@ public class InvoiceActivity extends AppCompatActivity {
     private String[] titles = new String[]{"Account Invoice", "Store Invoice"};
     // tab titles
 
+    /**
+     * onCreateOptionsMenu
+     * set All InvoiceActivity options Menu
+     */
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
@@ -54,6 +62,10 @@ public class InvoiceActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * onCreate
+     * set All InvoiceActivity needed
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +83,10 @@ public class InvoiceActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * onOptionsItemSelected
+     * set All InvoiceActivity onOptionsItems needed
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
@@ -89,6 +105,10 @@ public class InvoiceActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * MyPagerAdapterClass
+     * set All PagerAdapter in InvoiceActivity needed
+     */
     private class MyPagerAdapter extends FragmentStateAdapter {
 
         /**

@@ -30,11 +30,18 @@ import java.util.Locale;
 
 /**
  * The type Product detail.
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
  */
 public class ProductDetail extends AppCompatActivity {
 
     private TextView prodDetailName, prodDetailWeight, prodDetailCondition, prodDetailCategory, prodDetailPrice, prodDetailDiscount, prodDetailShipment;
 
+    /**
+     * onCreate
+     * set All ProductDetail needed
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +99,9 @@ public class ProductDetail extends AppCompatActivity {
 
         EditText prodCount = (EditText) findViewById(R.id.btnAmountProdDetail);
 
+        /**
+         * prevButton Function
+         */
         Button prevButton = (Button) findViewById(R.id.btnMinusProdDetail);
         prevButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -111,6 +121,9 @@ public class ProductDetail extends AppCompatActivity {
             }
         });
 
+        /**
+         * nextButton Function
+         */
         Button nextButton = (Button) findViewById(R.id.btnPlusProdDetail);
         nextButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -126,6 +139,9 @@ public class ProductDetail extends AppCompatActivity {
 
         EditText etProductDetailAddress = (EditText) findViewById(R.id.etProductDetailAddress);
 
+        /**
+         * confirmButton Function
+         */
         Button confirmButton = (Button) findViewById(R.id.btnConfirmProdDetail);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,12 +170,16 @@ public class ProductDetail extends AppCompatActivity {
                     }
                 };
 
+                //createPaymentRequest
                 CreatePaymentRequest paymentRequest = new CreatePaymentRequest(Integer.parseInt(prodId), Integer.parseInt(prodCount.getText().toString()), etProductDetailAddress.getText().toString(), Byte.parseByte(shipment), listener, errorListener);
                 RequestQueue queue = Volley.newRequestQueue(ProductDetail.this);
                 queue.add(paymentRequest);
             }
         });
 
+        /**
+         * cancelProduct Function
+         */
         Button cancelProdDetail = (Button) findViewById(R.id.btnCancelProdDetail);
         cancelProdDetail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,6 +189,9 @@ public class ProductDetail extends AppCompatActivity {
             }
         });
 
+        /**
+         * buyProduct Function
+         */
         Button buyButton = (Button) findViewById(R.id.btnBuyProdDetail);
         buyButton.setOnClickListener(new View.OnClickListener() {
             @Override

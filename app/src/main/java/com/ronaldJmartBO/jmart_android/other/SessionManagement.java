@@ -10,17 +10,35 @@ import android.content.SharedPreferences.Editor;
 import com.ronaldJmartBO.jmart_android.activity.LoginActivity;
 import com.ronaldJmartBO.jmart_android.activity.MainActivity;
 
+/**
+ * The Session management.
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
+ */
 public class SessionManagement {
-    // Shared Preferences
+    /**
+     * The Pref.
+     */
+// Shared Preferences
     SharedPreferences pref;
 
-    // Editor for Shared preferences
+    /**
+     * The Editor.
+     */
+// Editor for Shared preferences
     Editor editor;
 
-    // Context
+    /**
+     * The Context.
+     */
+// Context
     Context _context;
 
-    // Shared pref mode
+    /**
+     * The Private mode.
+     */
+// Shared pref mode
     int PRIVATE_MODE = 0;
 
     // Sharedpref file name
@@ -28,12 +46,23 @@ public class SessionManagement {
 
     // All Shared Preferences Keys
 
+    /**
+     * The constant KEY_LOGIN.
+     */
     public static final String KEY_LOGIN = "false";
 
-    // User name (make variable public to access from outside)
+    /**
+     * The constant KEY_ID.
+     */
+// User name (make variable public to access from outside)
     public static final String KEY_ID = "id";
 
-    // Constructor
+    /**
+     * Instantiates a new Session management.
+     *
+     * @param context the context
+     */
+// Constructor
     public SessionManagement(Context context){
         this._context = context;
         pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
@@ -42,7 +71,9 @@ public class SessionManagement {
 
     /**
      * Create login session
-     * */
+     *
+     * @param id the id
+     */
     public void createLoginSession(String id){
         // Storing login value as TRUE
         editor.putString(KEY_LOGIN, "true");
@@ -56,7 +87,9 @@ public class SessionManagement {
 
     /**
      * Get stored session data
-     * */
+     *
+     * @return the hash map
+     */
     public HashMap<String, String> getUserDetails(){
         HashMap<String, String> user = new HashMap<String, String>();
         // user id
@@ -69,7 +102,7 @@ public class SessionManagement {
 
     /**
      * Clear session details
-     * */
+     */
     public void logoutUser(){
         // Clearing all data from Shared Preferences
         editor.clear();

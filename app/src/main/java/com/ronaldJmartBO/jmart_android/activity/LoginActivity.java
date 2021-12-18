@@ -24,6 +24,9 @@ import org.json.JSONObject;
 
 /**
  * The type Login activity.
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
  */
 public class LoginActivity extends AppCompatActivity {
     private static final Gson gson = new Gson();
@@ -47,6 +50,10 @@ public class LoginActivity extends AppCompatActivity {
         loggedAccount = account;
     }
 
+    /**
+     * onCreate
+     * set All LoginActivity needed
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +65,13 @@ public class LoginActivity extends AppCompatActivity {
         Button loginButton = findViewById(R.id.loginButton);
         TextView registerLogin = findViewById(R.id.registerLoginButton);
 
+        /**
+         * login Account Function
+         */
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //loginRequest
                 LoginRequest newLogin = new LoginRequest(
                     editEmail.getText().toString(),
                     editPassword.getText().toString(),
@@ -91,6 +102,10 @@ public class LoginActivity extends AppCompatActivity {
                 queue.add(newLogin);
             }
         });
+
+        /**
+         * register from LoginAcitvity Function
+         */
         registerLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

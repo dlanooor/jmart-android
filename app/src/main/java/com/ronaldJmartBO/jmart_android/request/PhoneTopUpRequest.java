@@ -6,6 +6,12 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 
+/**
+ * The Phone top up request.
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
+ */
 public class PhoneTopUpRequest extends StringRequest {
     private static final String URL = "http://10.0.2.2:8080/phonetopup/" + getLoggedAccount().id + "/phone?page=%d&pageSize=%d";
 

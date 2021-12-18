@@ -7,7 +7,10 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 
 /**
- * The type Payment store request.
+ * The Payment store request.
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
  */
 public class PaymentStoreRequest extends StringRequest {
     private static String id = loggedId;

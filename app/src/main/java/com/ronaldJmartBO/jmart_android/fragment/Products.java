@@ -39,9 +39,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link Products#newInstance} factory method to
- * create an instance of this fragment.
+ * Products Fragment
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
  */
 public class Products extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -68,10 +69,12 @@ public class Products extends Fragment {
     /**
      * The Prev button.
      */
-    Button prevButton, /**
+    Button prevButton,
+    /**
      * The Next button.
      */
-    nextButton, /**
+    nextButton,
+    /**
      * The Go button.
      */
     goButton;

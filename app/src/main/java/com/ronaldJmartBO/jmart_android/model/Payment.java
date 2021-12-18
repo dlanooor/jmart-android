@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * The type Payment.
+ * Payment Model
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
  */
 public class Payment extends Invoice {
     /**

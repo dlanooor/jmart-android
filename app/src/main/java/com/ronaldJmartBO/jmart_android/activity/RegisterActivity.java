@@ -21,6 +21,9 @@ import org.json.JSONObject;
 
 /**
  * The type Register activity.
+ * @author Ronald Grant
+ * @version 2.0
+ * @since 19 December 2021
  */
 public class RegisterActivity extends AppCompatActivity {
     private EditText NameRegister;
@@ -28,6 +31,10 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText PasswordRegister;
     private Button btnRegister;
 
+    /**
+     * onCreate
+     * set All RegisterActivity needed
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +45,9 @@ public class RegisterActivity extends AppCompatActivity {
         EmailRegister = findViewById(R.id.registerEmail);
         PasswordRegister = findViewById(R.id.registerPassword);
 
+        /**
+         * registerButton Function
+         */
         btnRegister = findViewById(R.id.registerButton);
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +77,8 @@ public class RegisterActivity extends AppCompatActivity {
                 String name = NameRegister.getText().toString();
                 String email = EmailRegister.getText().toString();
                 String password = PasswordRegister.getText().toString();
+
+                //register Request
                 RegisterRequest registerRequest = new RegisterRequest(name, email, password, listener, errorListener);
                 RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                 queue.add(registerRequest);
